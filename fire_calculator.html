@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate FIRE Calculator | The Investment Calculator Site</title>
+    <title>FIRE Calculator | Financial Independence & Retire Early Planning Tool</title>
+    <meta name="description" content="Calculate your FIRE number and plan for early retirement with our FREE FIRE calculator. Determine your financial independence, investment growth, and safe withdrawal strategy.">
+
+    <!-- Keywords (optional, but can be used for some search engines) -->
+    <meta name="keywords" content="FIRE calculator, financial independence calculator, retire early calculator, early retirement planning, 4% rule calculator, retirement savings calculator, passive income calculator">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="application/ld+json">
+        [
+        {
+            "@context": "https://schema.org",
+            "@type": "FinancialCalculator",
+            "name": "FIRE (Financial Independence Retire Early) Calculator",
+            "description": "Calculate your FIRE number and retirement age based on savings, annual spend, and withdrawal rates.",
+            "category": "Retirement Planning",
+            "url": "https://yourdomain.com/fire-calculator",
+            "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+            },
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Web Browser"
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "The Complete Guide to FIRE (Financial Independence, Retire Early)",
+            "description": "A comprehensive guide exploring the principles, formulas, and strategies to achieve financial independence and early retirement.",
+            "author": {
+            "@type": "Organization",
+            "name": "Your Brand Name"
+            },
+            "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://yourdomain.com/fire-calculator"
+            }
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the ideal savings rate for FIRE?",
+                "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most FIRE enthusiasts aim for a savings rate of 50% or higher of their income. Higher savings rates significantly reduce the time required to reach financial independence."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much money do I need to retire early?",
+                "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Your required portfolio is generally your annual expenses divided by your safe withdrawal rate (commonly 4%). For example, $40,000 ÷ 0.04 = $1,000,000."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I achieve FIRE with a moderate income?",
+                "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, achieving FIRE with a moderate income is possible through aggressive saving, frugal living, and smart investing, although it may take longer compared to higher-income earners."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are the risks of retiring early?",
+                "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Risks include market volatility, unexpected expenses, healthcare costs, and underestimating inflation. Planning conservatively and maintaining an emergency fund mitigates these risks."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between Lean FIRE and Fat FIRE?",
+                "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Lean FIRE is achieved with minimal living expenses and a frugal lifestyle, while Fat FIRE allows for higher spending and a more luxurious retirement lifestyle."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I achieve FIRE without investing in the stock market?",
+                "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "While it is possible through savings and alternative investments such as real estate or bonds, achieving FIRE without stock market exposure may require a higher savings rate and longer timeline."
+                }
+            }
+            ]
+        }
+        ]
+    </script>
+
+</head>
+<body class="bg-body-tertiary">
+
+<header class="navbar navbar-expand-lg shadow-sm mb-4">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">The Investment Calculator Site</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="./index.html">All Calculators</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Calculators
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="./fire_calculator.html">FIRE Calculator</a></li>
+                        <li><a class="dropdown-item" href="./compound_interest_calculator.html">Compound Interest Calculator</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn btn-link text-white text-decoration-none fs-4 p-0" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            </button>
+                </li>
+            </ul>
+        </div>
+        
+        <button class="btn btn-link text-white text-decoration-none fs-4 p-0" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            </button>
+    </div>
+</header>
+
+<main class="container mb-5">
+    <div class="row g-4">
+        <section class="col-lg-5" aria-labelledby="calc-input-title">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h1 id="calc-input-title" class="h5 mb-4">FIRE (Financial Independence Retire Early) Calculator</h2>
+                    <form id="fireForm">
+                        <div class="mb-3">
+                            <label for="currency" class="form-label fw-bold">Currency</label>
+                            <select id="currency" class="form-select">
+                                <option value="$">USD ($)</option>
+                                <option value="£">GBP (£)</option>
+                                <option value="€">EUR (€)</option>
+                                <option value="¥">JPY (¥)</option>
+                                <option value="₹">INR (₹)</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label for="age" class="form-label fw-bold">Current Age</label>
+                                <input type="number" id="age" class="form-control" value="30">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="currentSavings" class="form-label fw-bold">Current Savings</label>
+                                <input type="number" id="currentSavings" class="form-control" value="50000">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="monthlySavings" class="form-label fw-bold">Monthly Savings</label>
+                            <input type="number" id="monthlySavings" class="form-control" value="2500">
+                        </div>
+                        <div class="mb-3">
+                            <label for="annualSpending" class="form-label fw-bold">Annual Retirement Spend</label>
+                            <input type="number" id="annualSpending" class="form-control" value="45000">
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3">
+                                <label for="swr" class="form-label fw-bold">Withdrawal Rate (%)</label>
+                                <input type="number" id="swr" class="form-control" value="4" step="0.1">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="expectedReturn" class="form-label fw-bold">Annual Return (%)</label>
+                                <input type="number" id="expectedReturn" class="form-control" value="7" step="0.1">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="otherIncome" class="form-label fw-bold">Other Annual Retirement Income</label>
+                            <input type="number" id="otherIncome" class="form-control" value="0">
+                        </div>
+                        <button type="button" onclick="calculateFIRE()" class="btn btn-success w-100 fw-bold shadow-sm">Calculate FIRE Number</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="col-lg-7" aria-labelledby="results-title">
+            <h2 id="results-title" class="visually-hidden">Projection Results</h2>
+            
+            <div class="row g-3 mb-4 text-center" aria-live="polite">
+                <article class="col-md-4">
+                    <div class="card border-0 shadow-sm p-3">
+                        <p class="text-uppercase fw-bold opacity-75 small mb-1">FIRE Age</p>
+                        <p id="resAge" class="h2 m-0 font-monospace">-</p>
+                    </div>
+                </article>
+                <article class="col-md-4">
+                    <div class="card border-0 shadow-sm p-3">
+                        <p class="text-uppercase fw-bold opacity-75 small mb-1">FIRE Number</p>
+                        <p id="resNumber" class="h2 m-0 font-monospace">-</p>
+                    </div>
+                </article>
+                <article class="col-md-4">
+                    <div class="card border-0 shadow-sm p-3">
+                        <p class="text-uppercase fw-bold opacity-75 small mb-1">Years to FIRE</p>
+                        <p id="resYears" class="h2 m-0 font-monospace">-</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3 class="h5 fw-bold m-0">Wealth Accumulation</h3>
+                        <select id="viewMode" class="form-select form-select-sm w-auto" onchange="updateVisuals()">
+                            <option value="yearly">Yearly View</option>
+                            <option value="monthly">Monthly View</option>
+                        </select>
+                    </div>
+                    <div style="height: 380px;">
+                        <canvas id="fireChart" role="img" aria-label="A stacked histogram showing savings and interest growth over time."></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h3 class="h5 fw-bold m-0">Amortization Schedule</h3>
+                        <button onclick="downloadCSV()" class="btn btn-outline-secondary btn-sm">Export CSV</button>
+                    </div>
+                    <div class="table-responsive" style="max-height: 400px;">
+                        <table class="table table-hover table-striped align-middle border" id="fireTable">
+                            <thead class="table-dark sticky-top">
+                                <tr>
+                                    <th id="tableColHeading">Age</th>
+                                    <th>Cumulative Savings</th>
+                                    <th>Interest Earned</th>
+                                    <th>Portfolio Value</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr><td colspan="4" class="text-center text-muted">Awaiting calculation...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <article aria-labelledby="fire-article" class="mt-5 p-4 shadow-sm rounded border">
+    <header>
+      <h1 id="fire-article" class="mb-4">The Complete Guide to FIRE (Financial Independence, Retire Early)</h1>
+      <p class="lead">FIRE, or Financial Independence, Retire Early, is a strategy that allows individuals to achieve financial freedom and potentially retire decades earlier than the traditional retirement age. This guide explores the principles, formulas, strategies, and practical steps to achieve FIRE, along with common questions and considerations.</p>
+    </header>
+
+    <!-- What is FIRE -->
+    <section aria-labelledby="what-is-fire" class="mb-5">
+      <h2 id="what-is-fire">What is FIRE?</h2>
+      <p>FIRE stands for Financial Independence, Retire Early. It is a financial movement that encourages aggressive saving and investing to achieve financial independence well before the traditional retirement age. The concept revolves around accumulating a sufficient investment portfolio that generates enough passive income to cover your living expenses indefinitely.</p>
+      <p>Unlike traditional retirement planning, which relies on working until 65 or 70, FIRE emphasizes maximizing savings rate, minimizing unnecessary expenses, and leveraging compound growth in investments. Many FIRE enthusiasts aim for a <strong>50% or higher savings rate</strong> to reach their goals faster.</p>
+    </section>
+
+    <!-- FIRE Formula -->
+    <section aria-labelledby="fire-formula" class="mb-5">
+      <h2 id="fire-formula">The FIRE Formula</h2>
+      <p>The fundamental calculation for achieving FIRE involves determining the investment portfolio required to sustain your desired lifestyle indefinitely. The core formula is based on the <strong>4% safe withdrawal rule</strong>:</p>
+
+      <!-- MathML Formula -->
+      <figure class="mb-3" aria-label="FIRE Portfolio Calculation Formula">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mi>Portfolio</mi>
+          <mo>=</mo>
+          <mi>Annual Expenses</mi>
+          <mo>/</mo>
+          <mn>0.04</mn>
+        </math>
+        <figcaption class="text-muted">Portfolio = Annual Expenses ÷ Safe Withdrawal Rate (4%)</figcaption>
+      </figure>
+
+      <!-- HTML fallback -->
+      <p class="font-monospace"><strong>Portfolio = Annual Expenses ÷ Safe Withdrawal Rate (4%)</strong></p>
+      <ul>
+        <li><strong>Portfolio:</strong> The total investment required to achieve financial independence.</li>
+        <li><strong>Annual Expenses:</strong> Your expected yearly spending in retirement.</li>
+        <li><strong>Safe Withdrawal Rate:</strong> Percentage of portfolio you can withdraw each year without depleting it (commonly 4%).</li>
+      </ul>
+
+      <p>This formula allows you to calculate your FIRE number. For example, if your annual expenses are $40,000, your FIRE portfolio would be:</p>
+      <p class="font-monospace"><strong>Portfolio = 40,000 ÷ 0.04 = $1,000,000</strong></p>
+      <p>With a $1,000,000 portfolio, withdrawing $40,000 per year would theoretically allow you to live indefinitely without running out of money.</p>
+    </section>
+
+    <!-- How to Achieve FIRE -->
+    <section aria-labelledby="how-to-achieve-fire" class="mb-5">
+      <h2 id="how-to-achieve-fire">How to Achieve FIRE</h2>
+      <p>Reaching FIRE requires a disciplined approach to savings, investment, and lifestyle. Here are key steps commonly recommended:</p>
+      <ul>
+        <li><strong>Maximize Savings Rate:</strong> Aim to save 50% or more of your income by reducing expenses and increasing income streams.</li>
+        <li><strong>Invest Aggressively:</strong> Allocate savings into investments with compound growth, such as stock index funds, ETFs, or real estate.</li>
+        <li><strong>Track Expenses:</strong> Maintain a strict budget and identify areas for cost-cutting to accelerate savings.</li>
+        <li><strong>Calculate Your FIRE Number:</strong> Use the formula above to determine how much you need to retire.</li>
+        <li><strong>Automate Investments:</strong> Automate contributions to maximize consistency and take advantage of compounding.</li>
+        <li><strong>Consider Side Income:</strong> Freelancing, rental income, or small businesses can significantly accelerate your path to FIRE.</li>
+      </ul>
+    </section>
+
+    <!-- Benefits of FIRE -->
+    <section aria-labelledby="benefits-of-fire" class="mb-5">
+      <h2 id="benefits-of-fire">Benefits of FIRE</h2>
+      <p>Achieving FIRE offers numerous financial and personal advantages:</p>
+      <ul>
+        <li><strong>Financial Freedom:</strong> You can live without relying on a paycheck and have greater control over your life choices.</li>
+        <li><strong>Time Flexibility:</strong> Early retirement provides more time for hobbies, travel, volunteering, or entrepreneurship.</li>
+        <li><strong>Reduced Stress:</strong> Financial security can reduce stress associated with job insecurity and financial obligations.</li>
+        <li><strong>Intentional Living:</strong> Focusing on FIRE often encourages minimalism, mindful spending, and intentional lifestyle choices.</li>
+        <li><strong>Generational Impact:</strong> Building wealth early can benefit your family and allow for early financial education for children.</li>
+      </ul>
+    </section>
+
+    <!-- Factors Affecting FIRE -->
+    <section aria-labelledby="factors-affecting-fire" class="mb-5">
+      <h2 id="factors-affecting-fire">Factors Affecting Your FIRE Journey</h2>
+      <p>The path to FIRE is influenced by several key factors:</p>
+      <ol>
+        <li><strong>Savings Rate:</strong> Higher savings rates accelerate your timeline.</li>
+        <li><strong>Investment Returns:</strong> Compound growth of investments plays a critical role.</li>
+        <li><strong>Expenses:</strong> Lower living costs reduce the portfolio required for FIRE.</li>
+        <li><strong>Inflation:</strong> Future expenses may increase; planning for inflation is critical.</li>
+        <li><strong>Taxes:</strong> Taxes on withdrawals or investment gains can impact sustainability.</li>
+        <li><strong>Withdrawal Rate:</strong> Conservative withdrawal rates reduce risk of depleting your portfolio.</li>
+      </ol>
+    </section>
+
+    <!-- Strategies to Achieve FIRE -->
+    <section aria-labelledby="strategies-to-achieve-fire" class="mb-5">
+      <h2 id="strategies-to-achieve-fire">Strategies to Achieve FIRE</h2>
+      <p>There are several FIRE strategies depending on desired retirement style:</p>
+      <ul>
+        <li><strong>Lean FIRE:</strong> Achieving financial independence with minimal expenses, often with a frugal lifestyle.</li>
+        <li><strong>Fat FIRE:</strong> Achieving FIRE while maintaining a higher level of spending.</li>
+        <li><strong>Barista FIRE:</strong> Partially retired with reduced expenses, often supplemented by part-time income.</li>
+        <li><strong>Geoarbitrage:</strong> Reducing expenses by relocating to lower-cost regions.</li>
+        <li><strong>Side Hustle FIRE:</strong> Using additional income streams to accelerate investment and reduce retirement age.</li>
+      </ul>
+    </section>
+
+    <!-- Common Mistakes -->
+    <section aria-labelledby="common-mistakes" class="mb-5">
+      <h2 id="common-mistakes">Common Mistakes on the FIRE Journey</h2>
+      <p>While FIRE can be rewarding, several mistakes can hinder success:</p>
+      <ul>
+        <li>Underestimating future expenses or inflation.</li>
+        <li>Relying on overly optimistic investment returns.</li>
+        <li>Ignoring taxes and fees in portfolio calculations.</li>
+        <li>Excessive lifestyle creep during the savings phase.</li>
+        <li>Failing to account for healthcare or emergency costs post-retirement.</li>
+      </ul>
+    </section>
+
+    <!-- FAQ Section -->
+    <section aria-labelledby="fire-faq" class="mb-5">
+      <h2 id="fire-faq">Frequently Asked Questions (FAQ)</h2>
+      <div class="accordion" id="fireFaqAccordion">
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="fireFaq1">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#fireCollapse1" aria-expanded="true" aria-controls="fireCollapse1">
+              1. What is the ideal savings rate for FIRE?
+            </button>
+          </h3>
+          <div id="fireCollapse1" class="accordion-collapse collapse show" aria-labelledby="fireFaq1" data-bs-parent="#fireFaqAccordion">
+            <div class="accordion-body">
+              Most FIRE enthusiasts aim for a savings rate of 50% or higher of their income. Higher savings rates significantly reduce the time required to reach financial independence.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="fireFaq2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fireCollapse2" aria-expanded="false" aria-controls="fireCollapse2">
+              2. How much money do I need to retire early?
+            </button>
+          </h3>
+          <div id="fireCollapse2" class="accordion-collapse collapse" aria-labelledby="fireFaq2" data-bs-parent="#fireFaqAccordion">
+            <div class="accordion-body">
+              Your required portfolio is generally your annual expenses divided by your safe withdrawal rate (commonly 4%). For example, $40,000 ÷ 0.04 = $1,000,000.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="fireFaq3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fireCollapse3" aria-expanded="false" aria-controls="fireCollapse3">
+              3. Can I achieve FIRE with a moderate income?
+            </button>
+          </h3>
+          <div id="fireCollapse3" class="accordion-collapse collapse" aria-labelledby="fireFaq3" data-bs-parent="#fireFaqAccordion">
+            <div class="accordion-body">
+              Yes, achieving FIRE with a moderate income is possible through aggressive saving, frugal living, and smart investing, although it may take longer compared to higher-income earners.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="fireFaq4">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fireCollapse4" aria-expanded="false" aria-controls="fireCollapse4">
+              4. What are the risks of retiring early?
+            </button>
+          </h3>
+          <div id="fireCollapse4" class="accordion-collapse collapse" aria-labelledby="fireFaq4" data-bs-parent="#fireFaqAccordion">
+            <div class="accordion-body">
+              Risks include market volatility, unexpected expenses, healthcare costs, and underestimating inflation. Planning conservatively and maintaining an emergency fund mitigates these risks.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="fireFaq5">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fireCollapse5" aria-expanded="false" aria-controls="fireCollapse5">
+              5. What is the difference between Lean FIRE and Fat FIRE?
+            </button>
+          </h3>
+          <div id="fireCollapse5" class="accordion-collapse collapse" aria-labelledby="fireFaq5" data-bs-parent="#fireFaqAccordion">
+            <div class="accordion-body">
+              Lean FIRE is achieved with minimal living expenses and a frugal lifestyle, while Fat FIRE allows for higher spending and a more luxurious retirement lifestyle.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="fireFaq6">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fireCollapse6" aria-expanded="false" aria-controls="fireCollapse6">
+              6. Can I achieve FIRE without investing in the stock market?
+            </button>
+          </h3>
+          <div id="fireCollapse6" class="accordion-collapse collapse" aria-labelledby="fireFaq6" data-bs-parent="#fireFaqAccordion">
+            <div class="accordion-body">
+              While it is possible through savings and alternative investments such as real estate or bonds, achieving FIRE without stock market exposure may require a higher savings rate and longer timeline.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="static/js/fire_calculator.js"></script>
+</body>
+</html>
